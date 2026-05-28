@@ -1,9 +1,8 @@
 resource "aws_route53_record" "www" {
-  count   = 4
+  count   = length(var.instances)
   zone_id = var.zone_id
-  name    = "${var.instance_Name[count.index]}.${var.domain_name}"
+  name    = "${var.instances[count.index]}.${var.domain_name}"
   type    = "A"
-  ttl     = 1
+  ttl     = 300
   records = [aws_instance.roboshop[count.index].private_ip]
-  allow_overwrite = true
 }
