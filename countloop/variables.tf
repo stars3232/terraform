@@ -33,3 +33,11 @@ variable "cidr_blocks" {
 variable "instances" {
     default = [ "mongodb", "redis", "mysql" ]
 }
+
+variable "zone_id" {
+    default = "Z05111502D8K1UO9E4VW9"
+}
+
+variable "domain_name" {
+    default = "sivarobots.shop"
+}
