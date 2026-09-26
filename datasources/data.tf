@@ -1,10 +1,11 @@
-data "aws_ami" "joindevops" {
-  
-  owners = ["973714476881"]
-   
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+
+  owners = ["amazon"]
+
   filter {
     name   = "name"
-    values = ["RHEL-9-DevOps-Practice"]
+    values = ["al2023-ami-*-x86_64"]
   }
 
   filter {
@@ -13,11 +14,14 @@ data "aws_ami" "joindevops" {
   }
 
   filter {
-    name  = "root-device-type"
+    name   = "root-device-type"
     values = ["ebs"]
   }
 }
 
+
+
 output "ami_id" {
-      value = data.aws_ami.joindevops
+  value = data.aws_ami.amazon_linux.id
 }
+
