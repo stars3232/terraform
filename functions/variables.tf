@@ -42,7 +42,7 @@ variable "domain_name" {
     default = "sivarobots.shop"
 }
 
-variable "proj" {
+variable "Common_tags" {
     default = {
         Project = "roboshop"
         Env  = "dev"
