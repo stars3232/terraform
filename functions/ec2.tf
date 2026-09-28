@@ -1,35 +1,32 @@
 resource "aws_instance" "helloworld" {
-  ami           = "ami-0220d79f3f480ecf5"
-  instance_type = "t2.micro"
+  count         = length(var.instances)
+  ami           = var.ami_id
+  instance_type = var.instance_type
   vpc_security_group_ids = [ aws_security_group.allow_all.id ]
 
-  tags = {
-    Name = "HelloWorld2"
-  }
+  tags = var.proj
 }
 
 
 resource "aws_security_group" "allow_all" {
-  name        = "allow_all"
-  description = "Allow all traffic from all ip addresses"
+  name        = var.sg_name
+  description = var.sg_description
 
-  tags = {
-    Name = "allow_all2"
-  }
+  tags = var.sg_tags
 
   ingress {
     description = "TLS from VPC"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr_blocks
   }
 
   egress {
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = var.cidr_blocks
     ipv6_cidr_blocks = ["::/0"]
   }
 }
